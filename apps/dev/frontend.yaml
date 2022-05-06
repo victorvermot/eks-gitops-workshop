@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frontend
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ''
+    repoURL: 'https://stefanprodan.github.io/podinfo'
+    targetRevision: 6.1.3
+    chart: podinfo
+    helm:
+      parameters:
+        - name: backend
+          value: 'http://backend-podinfo:9898/echo'
+        - name: replicaCount
+          value: '2'
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
