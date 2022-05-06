@@ -20,7 +20,7 @@ spec:
         - name: backend
           value: 'http://backend-podinfo:9898/echo'
         - name: replicaCount
-          value: '2'
+          value: '4'
   project: default
   syncPolicy:
     automated:
